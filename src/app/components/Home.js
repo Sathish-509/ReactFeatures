@@ -4,10 +4,11 @@ import PropTypes from 'prop-types'
 export class Home extends React.Component {
 	constructor(props){
 		super();
+		console.log("constructor");
 		this.state = {
 			age: props.age,
 			status: 0,
-			homeLink: props.initialLink
+			homeLink: props.initialLink,
 		};
 		setTimeout(() => {
 			this.setState({
@@ -30,6 +31,39 @@ export class Home extends React.Component {
 		this.setState({
 			homeLink: event.target.value
 		})
+	}
+
+	componentWillMount() {
+		console.log("component will mount");
+	}
+
+	componentDidMount() {
+		console.log("component Did mount");
+	}
+
+	UNSAFE_componentWillReceiveProps(nextProps) {
+		console.log("component will receive props ", nextProps);
+		//recommending to use getDerivedStateFromProps(nextProps, prevState)
+	}
+
+	shouldComponentUpdate(nextProps, nextState) {
+		console.log("should component update ", nextProps, nextState);
+		/* if(nextState.status === 1) {
+			return false;
+		} */ //if we return false from this hook, component update will not happen
+		return true;
+	}
+
+	componentWillUpdate(nextProps, nextState) {
+		console.log("component will update ", nextProps, nextState);
+	}
+
+	componentDidUpdate(prevProps, prevState) {
+		console.log("component Did update ", prevProps, prevState);
+	}
+
+	componentWillUnmount() {
+		console.log("component will umnount ");
 	}
 
 	render() {
